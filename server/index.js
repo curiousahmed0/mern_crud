@@ -35,6 +35,23 @@ app.post("/addPhone", async (req, res) => {
   }
 });
 
+app.get("/addPhone/:id", async (req, res) => {
+  const phoneBook = await PhoneBook.findById(req.params.id);
+  try {
+    res.status(200).json({
+      status: "success",
+      data: {
+        phoneBook,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
+      message: error,
+    });
+  }
+});
+
 app.get("/addPhone", async (req, res) => {
   const phoneBook = await PhoneBook.find({});
   try {
